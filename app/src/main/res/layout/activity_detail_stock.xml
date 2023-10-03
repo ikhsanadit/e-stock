@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detailstock.DetailStockActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#473080"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="?actionBarSize"
+            android:padding="@dimen/appbar_padding"
+            android:text="Detail Saham"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:textColor="@color/white"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tv_title_page"
+        android:layout_width="354dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/stock_data"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TableLayout
+        android:id="@+id/tb_table"
+        android:layout_width="354dp"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_page">
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:textColor="@color/black"
+                android:text="@string/company_name" />
+
+            <TextView
+                android:id="@+id/tv_company_name"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:padding="3dip"
+                tools:text="b" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:textColor="@color/black"
+                android:text="@string/code_stock" />
+
+            <TextView
+                android:id="@+id/tv_company_code"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:padding="3dip"
+                tools:text="2" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:textColor="@color/black"
+                android:text="@string/gpm" />
+
+            <TextView
+                android:id="@+id/tv_gpm"
+                android:textColor="@color/black"
+                android:gravity="left"
+                android:padding="3dip"
+                tools:text="2" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:textColor="@color/black"
+                android:text="@string/npm" />
+
+            <TextView
+                android:id="@+id/tv_npm"
+                android:textColor="@color/black"
+                android:gravity="left"
+                android:padding="3dip"
+                tools:text="2" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:textColor="@color/black"
+                android:text="@string/roe" />
+
+            <TextView
+                android:id="@+id/tv_roe"
+                android:textColor="@color/black"
+                android:gravity="left"
+                android:padding="3dip"
+                tools:text="2" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:textColor="@color/black"
+                android:text="@string/der" />
+
+            <TextView
+                android:id="@+id/tv_der"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:padding="3dip"
+                tools:text="2" />
+        </TableRow>
+
+    </TableLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_update"
+        android:layout_width="354dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#382B73"
+        android:text="@string/update_data"
+        android:textColor="@color/white"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_table" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete"
+        android:layout_width="354dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#FF3D00"
+        android:text="@string/delete"
+        android:textColor="@color/white"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_update" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

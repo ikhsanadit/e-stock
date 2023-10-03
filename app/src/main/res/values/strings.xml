@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">e-stock</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="topsis">TOPSIS</string>
+    <string name="saw">SAW</string>
+    <string name="homepage">Homepage</string>
+    <string name="spk">Sistem Pendukung Keputusan</string>
+    <string name="ikhsan_aditya">ikhsan aditya</string>
+    <string name="top_5">TOP 5</string>
+    <string name="stock_chart">Daftar Saham</string>
+    <string name="criteria_chart">Daftar Kriteria</string>
+    <string name="result">Hasil Perangkingan</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="greeting_login">Masuk</string>
+    <string name="create_account">Buat Akun</string>
+    <string name="email">Email</string>
+    <string name="name">Nama</string>
+    <string name="code_stock">Kode</string>
+    <string name="add_stock">Tambah Saham</string>
+    <string name="company_name">Nama Perusahaan</string>
+    <string name="company_code">Kode</string>
+    <string name="gpm">GPM</string>
+    <string name="npm">NPM</string>
+    <string name="roe">ROE</string>
+    <string name="der">DER</string>
+    <string name="add">Tambah</string>
+    <string name="stock_data">Data Saham</string>
+    <string name="save">Simpan</string>
+    <string name="delete">Hapus</string>
+    <string name="update_data">Rubah Data</string>
+    <string name="password_confirmation">Konfirmasi Password</string>
+    <string name="logout">Keluar</string>
+    <string name="criteria">Data Kriteria</string>
+    <string name="cost">Cost</string>
+    <string name="benefit">Benefit</string>
+    <string name="avg">Sedang</string>
+    <string name="low">Rendah</string>
+    <string name="high">Tinggi</string>
+    <string name="bobot_gpm">Bobot Kriteria GPM</string>
+    <string name="gpm_long">Gross Profit Margin (GPM)</string>
+    <string name="gpm_ket">Rasio yang digunakan untuk menghitung persentase pendapatan yang tersisa setelah perusahaan membayar harga pokok produksi atau harga pokok penjualan, semakin tinggi GPM, semakin menguntungkan perusahaan.</string>
+    <string name="npm_long">Net Profit Margin (NPM)</string>
+    <string name="npm_ket">Rasio ini menunjukkan laba bersih perusahaan untuk setiap penjualan, dan skor NPM yang lebih tinggi menunjukkan bisnis yang lebih efisien.</string>
+    <string name="roe_long">Return on Equity (ROE)</string>
+    <string name="roe_ket">Rasio yang digunakan untuk mengukur laba atas modal organisasi. Semakin tinggi nilai ROE maka semakin tinggi pengembalian modal yang ditanamkan pada perusahaan</string>
+    <string name="der_long">Debt to Equity Ratio (DER)</string>
+    <string name="der_ket">Rasio keuangan mencerminkan hubungan antara arus kas perusahaan dan hutang yang digunakan untuk membiayai asetnya</string>
+    <string name="whats_criteria">Kriteria diperlukan dalam perhitungan Sistem Pendukung Keputusan berikut kriteria yang digunakan dalam penelitian ini:</string>
+    <string name="bobot_npm">Bobot Kriteria NPM</string>
+    <string name="bobot_roe">Bobot Kriteria ROE</string>
+    <string name="gpm_short"><![CDATA[<= 10%]]></string>
+    <string name="gpm_avg">10,1% - 40%</string>
+    <string name="gpm_heigh"><![CDATA[>= 40,1%]]></string>
+    <string name="npm_short"><![CDATA[<= 1%]]></string>
+    <string name="npm_avg">1,1% - 10%</string>
+    <string name="npm_heigh"><![CDATA[>= 10,1%]]></string>
+    <string name="der_short"><![CDATA[<= 10%]]></string>
+    <string name="der_avg">10,1% - 99,9%</string>
+    <string name="der_heigh"><![CDATA[>= 100%]]></string>
+    <string name="data_criteria">Data Kriteria</string>
+    <string name="cr">Kriteria</string>
+    <string name="atr_cr">Atribut Kriteria</string>
+    <string name="cr_w">Bobot</string>
+</resources>

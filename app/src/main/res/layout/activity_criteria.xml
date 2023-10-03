@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.criteria.CriteriaActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#473080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="?actionBarSize"
+            android:padding="@dimen/appbar_padding"
+            android:text="@string/criteria"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:textColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/tv_criteria_info"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:text="@string/whats_criteria"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TableLayout
+                android:id="@+id/tb_table_criteria"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:stretchColumns="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_criteria_info">
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/gpm_long"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:scrollHorizontally="false"
+                        android:text="@string/gpm_ket"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/npm_long"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/npm_ket"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/roe_long"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:gravity="start"
+                        android:text="@string/roe_ket"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/der_long"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/der_ket"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/tv_data_criteria"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/data_criteria"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tb_table_criteria" />
+
+            <TableLayout
+                android:id="@+id/tb_table_criteria_atr"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:stretchColumns="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_data_criteria">
+
+                <TableRow
+                    android:background="#0079D6"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:padding="3dip"
+                        android:text="@string/cr"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/atr_cr"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/cr_w"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/gpm"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/benefit"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="0,5"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/npm"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/benefit"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="0,2"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/roe"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/benefit"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="0,2"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/der"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/cost"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="0,1"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/tv_sub_criteria_1"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/bobot_gpm"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tb_table_criteria_atr" />
+
+            <TableLayout
+                android:id="@+id/tb_table_sub_criteria_1"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:stretchColumns="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_criteria_1">
+
+                <TableRow
+                    android:background="#0079D6"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:padding="3dip"
+                        android:text="Range Nilai"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="Keterangan"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="Nilai"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/gpm_short"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/low"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/gpm_avg"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/avg"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="2"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/gpm_heigh"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/high"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="3"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/tv_sub_criteria_2"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/bobot_npm"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tb_table_sub_criteria_1" />
+
+            <TableLayout
+                android:id="@+id/tb_table_sub_criteria_2"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:stretchColumns="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_criteria_2">
+
+                <TableRow
+                    android:background="#0079D6"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:padding="3dip"
+                        android:text="Range Nilai"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="Keterangan"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="Nilai"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/npm_short"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/low"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/npm_avg"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/avg"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="2"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/npm_heigh"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/high"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="3"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/tv_sub_criteria_3"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/bobot_roe"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tb_table_sub_criteria_2" />
+
+            <TableLayout
+                android:id="@+id/tb_table_sub_criteria_3"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:stretchColumns="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_criteria_3">
+
+                <TableRow
+                    android:background="#0079D6"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:padding="3dip"
+                        android:text="Range Nilai"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="Keterangan"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="Nilai"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/npm_short"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/low"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/npm_avg"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/avg"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="2"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/npm_heigh"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/high"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="3"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/tv_sub_criteria_4"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Bobot Kriteria DER"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tb_table_sub_criteria_3" />
+
+            <TableLayout
+                android:id="@+id/tb_table_sub_criteria_4"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="100dp"
+                android:stretchColumns="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_criteria_4">
+
+                <TableRow
+                    android:background="#0079D6"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:padding="3dip"
+                        android:text="Range Nilai"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="Keterangan"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="Nilai"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/der_short"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/high"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="3"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/der_avg"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/avg"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="2"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/der_heigh"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/low"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+            </TableLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
