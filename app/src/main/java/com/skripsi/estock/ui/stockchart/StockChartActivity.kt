@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.skripsi.estock.databinding.ActivityStockChartBinding
-import com.skripsi.estock.datasource.model.DetailCompany
+import com.skripsi.estock.datasource.model.*
 import com.skripsi.estock.setSafeOnClickListener
 import com.skripsi.estock.ui.addstock.AddStockActivity
 import com.skripsi.estock.ui.detailstock.DetailStockActivity
@@ -70,20 +70,37 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
                 list.clear()
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
-                        val stockId = "${document.id}"
+                        val stockId = document.id
                         val name = document.getString("name")
                         val code = document.getString("code")
-                        val gpm = document.getString("gpm")
-                        val npm = document.getString("npm")
-                        val roe = document.getString("roe")
-                        val der = document.getString("der")
-                        if (stockId != null && name != null && code != null && gpm != null && npm != null && roe != null && der != null) {
-                            var stock = DetailCompany(stockId, name, code, gpm, npm, roe, der)
+                        val gpmMap = document.get("gpm") as? Map<*, *>
+                        val npmMap = document.get("npm") as? Map<*, *>
+                        val roeMap = document.get("roe") as? Map<*, *>
+                        val derMap = document.get("der") as? Map<*, *>
+
+                        if (name != null && code != null && gpmMap != null && npmMap != null && roeMap != null && derMap != null) {
+                            val gpmStock = gpmMap["gpm_stock"] as? String
+                            val npmStock = npmMap["npm_stock"] as? String
+                            val roeStock = roeMap["roe_stock"] as? String
+                            val derStock = derMap["der_stock"] as? String
+
+                            val stock = DetailCompany(
+                                stockId,
+                                name,
+                                code,
+                                gpm(gpmStock),
+                                npm(npmStock),
+                                roe(roeStock),
+                                der(derStock)
+                            )
+
                             // Add the stock to the list
                             list.add(stock)
+
                             // Store the stockId in the map
                             stockIdMap[stockId] = stockId
                         }
+                        Toast.makeText(this, "Berhasil mendapat data saham", Toast.LENGTH_SHORT).show()
                         Log.d("TAG_ambil", "${document.id} => ${document.data}")
                     }
                     stockAdapter.notifyDataSetChanged()

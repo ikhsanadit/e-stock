@@ -1,6 +1,5 @@
 package com.skripsi.estock.ui.editstock
 
-import android.R.id
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -15,25 +14,18 @@ import com.skripsi.estock.ui.detailstock.DetailStockActivity
 
 class EditStockActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditStockBinding
-    private lateinit var progresDialog: ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
 
     private val firestoreDb = Firebase.firestore
 
-    var idStock : String? = null
-    var name : String? =null
-    var code : String? = null
-    var gpm : String? = null
-    var npm : String? = null
-    var roe : String? = null
-    var der : String? = null
+    private var idStock: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditStockBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        progresDialog = ProgressDialog(this)
-
+        progressDialog = ProgressDialog(this)
 
         idStock = intent.getStringExtra("id")
         if (idStock != null) {
@@ -41,61 +33,108 @@ class EditStockActivity : AppCompatActivity() {
         } else {
             Log.w("TAG_Detail", "No 'id' extra found in the intent")
         }
-        getData()
 
-        binding.apply {
-            btnSave.setSafeOnClickListener {
-                var cname = binding.etFillCompanyName.text.toString()
-                var ccode = binding.etFillCompanyCode.text.toString()
-                var cgpm = binding.etFillGpm.text.toString()
-                var cnpm = binding.etFillNpm.text.toString()
-                var croe = binding.etFillRoe.text.toString()
-                var cder = binding.etFillDer.text.toString()
+        setupDataFields()
 
-                updateData(cname, ccode, cgpm, cnpm, croe, cder)
-
-            }
+        binding.btnSave.setSafeOnClickListener {
+            updateData()
         }
     }
 
-    private fun updateData(cName: String, cCode: String, cGpm: String, cNpm: String, cRoe: String, cDer: String) {
-        val detailCompany = mapOf(
-            "name" to cName,
-            "code" to cCode,
-            "gpm" to cGpm,
-            "npm" to cNpm,
-            "roe" to cRoe,
-            "der" to cDer
+    private fun updateData() {
+        val companyName = binding.etFillCompanyName.text.toString()
+        val companyCode = binding.etFillCompanyCode.text.toString()
+        val gpm = binding.etFillGpm.text.toString()
+        val npm = binding.etFillNpm.text.toString()
+        val roe = binding.etFillRoe.text.toString()
+        val der = binding.etFillDer.text.toString()
+
+        val gpmSpk = calculateGpmSpk(gpm)
+        val npmSpk = calculateSpk(npm)
+        val roeSpk = calculateSpk(roe)
+        val derSpk = calculateDerSpk(der)
+
+        val detailCompany = hashMapOf(
+            "name" to companyName,
+            "code" to companyCode,
+            "gpm" to hashMapOf(
+                "gpm_stock" to gpm,
+                "gpm_spk" to gpmSpk
+            ),
+            "npm" to hashMapOf(
+                "npm_stock" to npm,
+                "npm_spk" to npmSpk
+            ),
+            "roe" to hashMapOf(
+                "roe_stock" to roe,
+                "roe_spk" to roeSpk
+            ),
+            "der" to hashMapOf(
+                "der_stock" to der,
+                "der_spk" to derSpk
+            )
         )
-        progresDialog.setMessage("Mengubah data")
-        progresDialog.show()
+
+        progressDialog.setMessage("Mengubah data")
+        progressDialog.show()
         firestoreDb.collection("detail company")
             .document(idStock ?: "id")
-            .update(detailCompany)
+            .update(detailCompany as Map<String, Any>)
             .addOnSuccessListener { documentReference ->
                 Toast.makeText(this, "Berhasil merubah data saham", Toast.LENGTH_SHORT).show()
                 val updatedIntent = Intent(this, DetailStockActivity::class.java)
                 updatedIntent.putExtra("id", idStock)
                 startActivity(updatedIntent)
-                progresDialog.dismiss()
+                progressDialog.dismiss()
                 finish()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "gagal menambah", Toast.LENGTH_SHORT).show()
-                Log.w("TAG", "Error adding document", e)
-                progresDialog.dismiss()
+                Toast.makeText(this, "Gagal mengubah data", Toast.LENGTH_SHORT).show()
+                Log.w("TAG", "Error updating document", e)
+                progressDialog.dismiss()
             }
     }
 
-    private fun getData() {
-        binding.apply {
-            etFillCompanyName.setText(intent.getStringExtra("name"))
-            etFillCompanyCode.setText(intent.getStringExtra("code"))
-            etFillGpm.setText(intent.getStringExtra("gpm"))
-            etFillNpm.setText(intent.getStringExtra("npm"))
-            etFillRoe.setText(intent.getStringExtra("roe"))
-            etFillDer.setText(intent.getStringExtra("der"))
+    private fun setupDataFields() {
+        val name = intent.getStringExtra("name")
+        val code = intent.getStringExtra("code")
+        val gpm = intent.getStringExtra("gpm")
+        val npm = intent.getStringExtra("npm")
+        val roe = intent.getStringExtra("roe")
+        val der = intent.getStringExtra("der")
 
+        binding.etFillCompanyName.setText(name)
+        binding.etFillCompanyCode.setText(code)
+        binding.etFillGpm.setText(gpm)
+        binding.etFillNpm.setText(npm)
+        binding.etFillRoe.setText(roe)
+        binding.etFillDer.setText(der)
+    }
+
+    private fun calculateSpk(value: String): Int {
+        val floatValue = value.toFloat()
+        return when {
+            floatValue <= 1.0 -> 1
+            floatValue <= 10.0 -> 2
+            else -> 3
+        }
+    }
+
+    private fun calculateGpmSpk(value: String): Int {
+        val floatValue = value.toFloat()
+        return when {
+            floatValue <= 10.0 -> 1
+            floatValue <= 40.0 -> 2
+            else -> 3
+        }
+    }
+
+    private fun calculateDerSpk(value: String): Int {
+        val floatValue = value.toFloat()
+        return when {
+            floatValue <= 10.0 -> 3
+            floatValue < 100.0 -> 2
+            else -> 1
         }
     }
 }
