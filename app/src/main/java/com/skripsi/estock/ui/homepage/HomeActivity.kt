@@ -9,6 +9,7 @@ import com.skripsi.estock.setSafeOnClickListener
 import com.skripsi.estock.ui.criteria.CriteriaActivity
 import com.skripsi.estock.ui.login.LoginActivity
 import com.skripsi.estock.ui.profile.ProfileActivity
+import com.skripsi.estock.ui.spk.SpkActivity
 import com.skripsi.estock.ui.stockchart.StockChartActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,7 +48,7 @@ class HomeActivity : AppCompatActivity() {
                 finish()
             }
             cvBtnResults.setSafeOnClickListener {
-                //startActivity(Intent(this@HomeActivity, ))
+                startActivity(Intent(this@HomeActivity, SpkActivity::class.java))
             }
         }
 

@@ -32,10 +32,10 @@ class AddStockActivity : AppCompatActivity() {
             btnAdd.setSafeOnClickListener {
                 val companyName = etFillCompanyName.text.toString()
                 val companyCode = etFillCompanyCode.text.toString()
-                val companyGpm = etFillGpm.text.toString()
-                val companyNpm = etFillNpm.text.toString()
-                val companyRoe = etFillRoe.text.toString()
-                val companyDer = etFillDer.text.toString()
+                val companyGpm = etFillGpm.text.toString().toDouble()
+                val companyNpm = etFillNpm.text.toString().toDouble()
+                val companyRoe = etFillRoe.text.toString().toDouble()
+                val companyDer = etFillDer.text.toString().toDouble()
 
                 if (validateInput(companyName, companyCode, companyGpm, companyNpm, companyRoe, companyDer)) {
                     addData(companyName, companyCode, companyGpm, companyNpm, companyRoe, companyDer)
@@ -49,17 +49,17 @@ class AddStockActivity : AppCompatActivity() {
     private fun validateInput(
         companyName: String,
         companyCode: String,
-        companyGpm: String,
-        companyNpm: String,
-        companyRoe: String,
-        companyDer: String
+        companyGpm: Double,
+        companyNpm: Double,
+        companyRoe: Double,
+        companyDer: Double
     ): Boolean {
         return companyName.isNotEmpty() && companyCode.isNotEmpty() &&
-                companyGpm.isNotEmpty() && companyNpm.isNotEmpty() &&
-                companyRoe.isNotEmpty() && companyDer.isNotEmpty()
+                companyGpm.toString().isNotEmpty() && companyNpm.toString().isNotEmpty() &&
+                companyRoe.toString().isNotEmpty() && companyDer.toString().isNotEmpty()
     }
 
-    private fun calculateSpk(value: Float): Int {
+    private fun calculateSpk(value: Double): Int {
         return when {
             value <= 1.0 -> 1
             value <= 10.0 -> 2
@@ -67,7 +67,7 @@ class AddStockActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculateGpmSpk(value: Float): Int {
+    private fun calculateGpmSpk(value: Double): Int {
         return when {
             value <= 10.0 -> 1
             value <= 40.0 -> 2
@@ -75,7 +75,7 @@ class AddStockActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculateDerSpk(value: Float): Int {
+    private fun calculateDerSpk(value: Double): Int {
         return when {
             value <= 10.0 -> 3
             value < 100.0 -> 2
@@ -86,15 +86,15 @@ class AddStockActivity : AppCompatActivity() {
     private fun addData(
         cName: String,
         cCode: String,
-        cGpm: String,
-        cNpm: String,
-        cRoe: String,
-        cDer: String
+        cGpm: Double,
+        cNpm: Double,
+        cRoe: Double,
+        cDer: Double
     ) {
-        val gpmValue = cGpm.toFloat()
-        val npmValue = cNpm.toFloat()
-        val roeValue = cRoe.toFloat()
-        val derValue = cDer.toFloat()
+        val gpmValue = cGpm
+        val npmValue = cNpm
+        val roeValue = cRoe
+        val derValue = cDer
 
         val gpmSpk = calculateGpmSpk(gpmValue)
         val npmSpk = calculateSpk(npmValue)
@@ -106,19 +106,19 @@ class AddStockActivity : AppCompatActivity() {
             "code" to cCode,
             "gpm" to hashMapOf(
                 "gpm_stock" to cGpm,
-                "gpm_spk" to gpmSpk.toString()
+                "gpm_spk" to gpmSpk
             ),
             "npm" to hashMapOf(
                 "npm_stock" to cNpm,
-                "npm_spk" to npmSpk.toString()
+                "npm_spk" to npmSpk
             ),
             "roe" to hashMapOf(
                 "roe_stock" to cRoe,
-                "roe_spk" to roeSpk.toString()
+                "roe_spk" to roeSpk
             ),
             "der" to hashMapOf(
                 "der_stock" to cDer,
-                "der_spk" to derSpk.toString()
+                "der_spk" to derSpk
             )
         )
 
