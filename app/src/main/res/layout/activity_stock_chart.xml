@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.stockchart.StockChartActivity">
 
+    <TextView
+        android:id="@+id/tv_spk"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="@string/notfound"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"

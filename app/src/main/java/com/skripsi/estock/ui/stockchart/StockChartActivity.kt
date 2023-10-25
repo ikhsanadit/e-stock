@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,6 +68,7 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
         firestoreDb.collection("detail company")
             .get()
             .addOnCompleteListener { task ->
+                Log.d("TAG task", "isi task: $task ")
                 list.clear()
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
@@ -100,13 +102,14 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
                             // Store the stockId in the map
                             stockIdMap[stockId] = stockId
                         }
-                        Toast.makeText(this, "Berhasil mendapat data saham", Toast.LENGTH_SHORT).show()
                         Log.d("TAG_ambil", "${document.id} => ${document.data}")
                     }
+                    binding.tvSpk.visibility = View.INVISIBLE
                     stockAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(applicationContext, "Data gagal di ambil!", Toast.LENGTH_SHORT).show()
                     Log.d("TAG", "getData: gagal")
+                    binding.tvSpk.visibility = View.VISIBLE
                 }
                 progresDialog.dismiss()
             }
@@ -114,6 +117,7 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
                 Toast.makeText(this, "Gagal mendapat data", Toast.LENGTH_SHORT).show()
                 Log.d("TAG", "Error getting documents: ", exception)
                 progresDialog.dismiss()
+                binding.tvSpk.visibility = View.VISIBLE
             }
     }
 

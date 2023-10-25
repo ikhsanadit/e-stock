@@ -7,7 +7,7 @@
     <string name="homepage">Homepage</string>
     <string name="spk">Sistem Pendukung Keputusan</string>
     <string name="ikhsan_aditya">ikhsan aditya</string>
-    <string name="top_5">TOP 5</string>
+    <string name="top_5">TOP 3</string>
     <string name="stock_chart">Daftar Saham</string>
     <string name="criteria_chart">Daftar Kriteria</string>
     <string name="result">Hasil Perangkingan</string>
@@ -63,4 +63,7 @@
     <string name="cr">Kriteria</string>
     <string name="atr_cr">Atribut Kriteria</string>
     <string name="cr_w">Bobot</string>
+    <string name="score">score</string>
+    <string name="notfound">tidak ada data ditemukan, silahkan tambahkan dahulu</string>
+    <string name="result_score">Hasil Perangkingan</string>
 </resources>

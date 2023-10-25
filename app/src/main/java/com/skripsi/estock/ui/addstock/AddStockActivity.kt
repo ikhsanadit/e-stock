@@ -32,10 +32,10 @@ class AddStockActivity : AppCompatActivity() {
             btnAdd.setSafeOnClickListener {
                 val companyName = etFillCompanyName.text.toString()
                 val companyCode = etFillCompanyCode.text.toString()
-                val companyGpm = etFillGpm.text.toString().toDouble()
-                val companyNpm = etFillNpm.text.toString().toDouble()
-                val companyRoe = etFillRoe.text.toString().toDouble()
-                val companyDer = etFillDer.text.toString().toDouble()
+                val companyGpm = etFillGpm.text.toString()
+                val companyNpm = etFillNpm.text.toString()
+                val companyRoe = etFillRoe.text.toString()
+                val companyDer = etFillDer.text.toString()
 
                 if (validateInput(companyName, companyCode, companyGpm, companyNpm, companyRoe, companyDer)) {
                     addData(companyName, companyCode, companyGpm, companyNpm, companyRoe, companyDer)
@@ -49,10 +49,10 @@ class AddStockActivity : AppCompatActivity() {
     private fun validateInput(
         companyName: String,
         companyCode: String,
-        companyGpm: Double,
-        companyNpm: Double,
-        companyRoe: Double,
-        companyDer: Double
+        companyGpm: String,
+        companyNpm: String,
+        companyRoe: String,
+        companyDer: String
     ): Boolean {
         return companyName.isNotEmpty() && companyCode.isNotEmpty() &&
                 companyGpm.toString().isNotEmpty() && companyNpm.toString().isNotEmpty() &&
@@ -86,15 +86,15 @@ class AddStockActivity : AppCompatActivity() {
     private fun addData(
         cName: String,
         cCode: String,
-        cGpm: Double,
-        cNpm: Double,
-        cRoe: Double,
-        cDer: Double
+        cGpm: String,
+        cNpm: String,
+        cRoe: String,
+        cDer: String
     ) {
-        val gpmValue = cGpm
-        val npmValue = cNpm
-        val roeValue = cRoe
-        val derValue = cDer
+        val gpmValue = cGpm.toDouble()
+        val npmValue = cNpm.toDouble()
+        val roeValue = cRoe.toDouble()
+        val derValue = cDer.toDouble()
 
         val gpmSpk = calculateGpmSpk(gpmValue)
         val npmSpk = calculateSpk(npmValue)
