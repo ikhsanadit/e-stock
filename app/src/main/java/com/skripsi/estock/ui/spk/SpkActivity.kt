@@ -37,6 +37,7 @@ class SpkActivity : AppCompatActivity(), SpkListAdapter.SpkClickListener {
     override fun onStart() {
         super.onStart()
         spkSAWandTOPSISMethod()
+
     }
 
 
@@ -47,11 +48,13 @@ class SpkActivity : AppCompatActivity(), SpkListAdapter.SpkClickListener {
         supportActionBar?.hide()
         progresDialog = ProgressDialog(this)
         progresDialog.setMessage("Silahkan Tunggu")
-
-        spkSAWandTOPSISMethod()
-
         getData()
 
+        stockAdapter = SpkListAdapter(list)
+        stockAdapter.listener = this
+
+        binding.rvListStock.layoutManager = LinearLayoutManager(this)
+        binding.rvListStock.adapter = stockAdapter
 
     }
 
@@ -82,6 +85,7 @@ class SpkActivity : AppCompatActivity(), SpkListAdapter.SpkClickListener {
                             stock.der.der_spk = derSpk
                             alternatifList.add(stock)
                         }
+                        Log.d("TAG_get_spk", "spkSAWandTOPSISMethod: ${document.id} => ${document.data}")
                     }
 
                     if (alternatifList.isNotEmpty()) {
@@ -97,11 +101,6 @@ class SpkActivity : AppCompatActivity(), SpkListAdapter.SpkClickListener {
                             alternatif.gpmSpkNormalisasi = alternatif.gpm.gpm_spk!!.toDouble() / maxC1!!
                             alternatif.npmSpkNormalisasi = alternatif.npm.npm_spk!!.toDouble() / maxC2!!
                             alternatif.roeSpkNormalisasi = alternatif.roe.roe_spk!!.toDouble() / maxC3!!
-
-                            Log.d("TAG_gpm", "normalisasi gpm: ${alternatif.gpmSpkNormalisasi}")
-                            Log.d("TAG_npm", "normalisasi npm: ${alternatif.npmSpkNormalisasi}")
-                            Log.d("TAG_roe", "normalisasi roe: ${alternatif.roeSpkNormalisasi}")
-                            Log.d("TAG_der", "normalisasi der: ${alternatif.derSpkNormalisasi}")
                         }
                         // pembobotan
                         for (i in alternatifList.indices) {
@@ -155,6 +154,7 @@ class SpkActivity : AppCompatActivity(), SpkListAdapter.SpkClickListener {
                         // Handle the case where the list is empty
                         Log.d("TAG", "alternatifList is empty")
                     }
+                    getData()
                 } else {
                     Toast.makeText(applicationContext, "Data gagal diambil!", Toast.LENGTH_SHORT).show()
                     Log.d("TAG", "getData: gagal")
@@ -166,15 +166,10 @@ class SpkActivity : AppCompatActivity(), SpkListAdapter.SpkClickListener {
                 Log.d("TAG", "Error getting documents: ", exception)
                 progresDialog.dismiss()
             }
+
     }
 
     private fun getData() {
-        stockAdapter = SpkListAdapter(list)
-        stockAdapter.listener = this
-
-        binding.rvListStock.layoutManager = LinearLayoutManager(this)
-        binding.rvListStock.adapter = stockAdapter
-
         progresDialog.show()
         firestoreDb.collection("detail company")
             .orderBy("spk_score", Query.Direction.DESCENDING)

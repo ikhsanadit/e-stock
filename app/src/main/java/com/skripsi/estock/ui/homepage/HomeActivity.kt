@@ -4,12 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.skripsi.estock.databinding.ActivityHomeBinding
@@ -20,11 +18,9 @@ import com.skripsi.estock.ui.homepage.adapter.HomeAdapter
 import com.skripsi.estock.ui.login.LoginActivity
 import com.skripsi.estock.ui.profile.ProfileActivity
 import com.skripsi.estock.ui.spk.SpkActivity
-import com.skripsi.estock.ui.spk.adapter.SpkListAdapter
 import com.skripsi.estock.ui.stockchart.StockChartActivity
-import dagger.hilt.android.AndroidEntryPoint
 
-class HomeActivity : AppCompatActivity(), HomeAdapter.HomeClickListener {
+class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var stockAdapter: HomeAdapter
 
@@ -39,7 +35,7 @@ class HomeActivity : AppCompatActivity(), HomeAdapter.HomeClickListener {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        var fullName = binding.tvUserName
+        val fullName = binding.tvUserName
 
         val firebaseUser = firebaseAuth.currentUser
         if (firebaseUser!=null){
@@ -56,7 +52,7 @@ class HomeActivity : AppCompatActivity(), HomeAdapter.HomeClickListener {
             }
             cvBtnStock.setSafeOnClickListener {
                 startActivity(Intent(this@HomeActivity, StockChartActivity::class.java))
-                finish()
+                //finish()
             }
             cvBtnCriteria.setSafeOnClickListener {
                 startActivity(Intent(this@HomeActivity, CriteriaActivity::class.java))
@@ -64,8 +60,14 @@ class HomeActivity : AppCompatActivity(), HomeAdapter.HomeClickListener {
             }
             cvBtnResults.setSafeOnClickListener {
                 startActivity(Intent(this@HomeActivity, SpkActivity::class.java))
+                finish()
             }
         }
+
+        stockAdapter = HomeAdapter(list)
+
+        binding.rvListStock.layoutManager = LinearLayoutManager(this)
+        binding.rvListStock.adapter = stockAdapter
 
     }
 
@@ -76,11 +78,7 @@ class HomeActivity : AppCompatActivity(), HomeAdapter.HomeClickListener {
 
     private fun getTop3() {
 
-        stockAdapter = HomeAdapter(list)
-        stockAdapter.listener = this
 
-        binding.rvListStock.layoutManager = LinearLayoutManager(this)
-        binding.rvListStock.adapter = stockAdapter
 
         firestoreDb.collection("detail company")
             .orderBy("spk_score", Query.Direction.DESCENDING)
@@ -127,7 +125,4 @@ class HomeActivity : AppCompatActivity(), HomeAdapter.HomeClickListener {
             }
     }
 
-    override fun onCardDetailClicked(id: String?) {
-        TODO("Not yet implemented")
-    }
 }

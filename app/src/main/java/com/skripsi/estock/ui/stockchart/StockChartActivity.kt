@@ -49,7 +49,7 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
         binding.apply {
             btnAdd.setSafeOnClickListener {
                 startActivity(Intent(this@StockChartActivity, AddStockActivity::class.java))
-                finish()
+                //finish()
             }
         }
 
@@ -127,6 +127,7 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
             val action = Intent(this, DetailStockActivity::class.java)
             action.putExtra("id", stockId)
             startActivity(action)
+            //finish()
             Log.d("TAG_id", "lempar id: $stockId")
         } else {
             // Handle the case where the name doesn't correspond to a stockId

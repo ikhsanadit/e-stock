@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.skripsi.estock.databinding.ItemSpkBinding
 import com.skripsi.estock.datasource.model.DetailCompany
-import com.skripsi.estock.setSafeOnClickListener
 
 internal class SpkListAdapter (private val listStock: List<DetailCompany>) : RecyclerView.Adapter<SpkListAdapter.SpkListAdapters>() {
 
@@ -34,10 +33,6 @@ internal class SpkListAdapter (private val listStock: List<DetailCompany>) : Rec
 
             Log.d("TAG_STOCK", "stock id :${stock.id}")
             Log.d("TAG_STOCK_Score", "score :${stock.spk_score}")
-
-            cvSpk.setSafeOnClickListener {
-                listener?.onCardDetailClicked(stock.id)
-            }
 
         }
     }

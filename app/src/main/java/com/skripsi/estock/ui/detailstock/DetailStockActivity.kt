@@ -75,7 +75,7 @@ class DetailStockActivity : AppCompatActivity() {
                 update.putExtra("roe", croeStock)
                 update.putExtra("der", cderStock)
                 startActivity(update)
-                finish()
+                //finish()
             }
             btnDelete.setSafeOnClickListener {
                 deleteStock()
@@ -92,8 +92,8 @@ class DetailStockActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Berhasil menghapus data saham", Toast.LENGTH_SHORT).show()
                 Log.d("TAG_Hapus", "DocumentSnapshot successfully deleted!")
-                finish()
                 startActivity(Intent(this, StockChartActivity::class.java))
+                finish()
                 progresDialog.dismiss()
             }
             .addOnFailureListener { e ->
@@ -167,5 +167,4 @@ class DetailStockActivity : AppCompatActivity() {
                 progresDialog.dismiss()
             }
     }
-
 }

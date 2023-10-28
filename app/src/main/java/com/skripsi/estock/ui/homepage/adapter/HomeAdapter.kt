@@ -34,9 +34,6 @@ internal class HomeAdapter (private val listStock: List<DetailCompany>) : Recycl
             Log.d("TAG_STOCK", "stock id :${stock.id}")
             Log.d("TAG_STOCK_Score", "score :${stock.spk_score}")
 
-            cvSpk.setSafeOnClickListener {
-                listener?.onCardDetailClicked(stock.id)
-            }
 
         }
     }
