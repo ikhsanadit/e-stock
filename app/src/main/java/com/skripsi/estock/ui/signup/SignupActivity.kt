@@ -4,9 +4,12 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.skripsi.estock.databinding.ActivitySignupBinding
 import com.skripsi.estock.setSafeOnClickListener
 import com.skripsi.estock.ui.homepage.HomeActivity
@@ -32,6 +35,7 @@ class SignupActivity : AppCompatActivity() {
             btnCreate.setSafeOnClickListener {
                 validate()
 
+
             }
             btnLogin.setSafeOnClickListener {
                 startActivity(Intent(this@SignupActivity, HomeActivity::class.java))
@@ -41,32 +45,65 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun processReg() {
-        var fullName = binding.etFillName.text.toString()
-        var email = binding.etFillEmail.text.toString()
-        var password = binding.etFillPassword.text.toString()
+        val fullName = binding.etFillName.text.toString()
+        val email = binding.etFillEmail.text.toString()
+        val password = binding.etFillPassword.text.toString()
+        val rbAdmin = binding.rbAdmin
+        val rbUser = binding.rbUser
+
+        val selectedSuperStar: Any = when {
+            rbAdmin.isChecked -> 1
+            rbUser.isChecked -> 2
+            else -> {
+                Toast.makeText(this, "Anda harus memilih role", Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
+
+        val selectedRole: Int = when (selectedSuperStar) {
+            is Int -> selectedSuperStar
+            else -> 0
+        }
+
+        val userData = hashMapOf(
+            "role" to selectedRole
+        )
+
+        Log.d("TAG_role", "value role: $selectedRole")
 
         progresDialog.show()
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful){
+                if (task.isSuccessful) {
+                    val user = task.result.user
+
+                    // Update display name
                     val userUpdateProfile = UserProfileChangeRequest.Builder()
                         .setDisplayName(fullName)
                         .build()
-                    val user = task.result.user
+
                     user!!.updateProfile(userUpdateProfile)
                         .addOnCompleteListener {
+                            // Save custom data to Firestore
+                            val userDocRef = Firebase.firestore.collection("users").document(user.uid)
+                            userDocRef.set(userData)
+                                .addOnSuccessListener {
+                                    progresDialog.dismiss()
+                                    startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
+                                }
+                                .addOnFailureListener { error2 ->
+                                    progresDialog.dismiss()
+                                    Toast.makeText(this, error2.localizedMessage, Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                        .addOnFailureListener { error ->
                             progresDialog.dismiss()
-                            startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
+                            Toast.makeText(this, error.localizedMessage, Toast.LENGTH_SHORT).show()
                         }
-                        .addOnFailureListener { error2 ->
-                            Toast.makeText(this, error2.localizedMessage, Toast.LENGTH_SHORT).show()
-                        }
-                }else{
+                } else {
                     progresDialog.dismiss()
+                    Toast.makeText(this, task.exception?.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
-            }
-            .addOnFailureListener { error ->
-                Toast.makeText(this, error.localizedMessage, Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -76,14 +113,21 @@ class SignupActivity : AppCompatActivity() {
         var etFillPasswordConf = binding.etFillPasswordConf
         var etFillName = binding.etFillName
 
+
+
         if (etFillName.text.toString().isNotEmpty()&& etFillEmail.text.toString().isNotEmpty() && etFillPassword.text.toString().isNotEmpty()){
-            if (etFillPassword.text.toString() == etFillPasswordConf.text.toString()){
-                processReg()
+            if (etFillPassword.text.toString().length >= 6){
+                if (etFillPassword.text.toString() == etFillPasswordConf.text.toString()){
+                    processReg()
+                }else{
+                    Toast.makeText(this, "Password harus sama", Toast.LENGTH_SHORT).show()
+                    binding.etPassword.error = "Password tidak sama"
+                    binding.etPasswordConf.error = "Password tidak sama"
+                }
             }else{
-                Toast.makeText(this, "Password Harus Sama", Toast.LENGTH_SHORT).show()
-                binding.etPassword.error = "Password tidak sama"
-                binding.etPasswordConf.error = "Password tidak sama"
+                Toast.makeText(this, "Password harus lebih dari 6 huruf", Toast.LENGTH_SHORT).show()
             }
+
         }else{
             binding.etEmail.error = "Email tidak boleh kosong"
 

@@ -78,8 +78,6 @@ class HomeActivity : AppCompatActivity() {
 
     private fun getTop3() {
 
-
-
         firestoreDb.collection("detail company")
             .orderBy("spk_score", Query.Direction.DESCENDING)
             .limit(3)

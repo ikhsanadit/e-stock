@@ -4,8 +4,10 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.skripsi.estock.databinding.ActivityDetailStockBinding
@@ -19,6 +21,8 @@ class DetailStockActivity : AppCompatActivity() {
     private lateinit var progresDialog: ProgressDialog
 
     private val firestoreDb = Firebase.firestore
+    private val userId = FirebaseAuth.getInstance().currentUser?.uid
+    private val usersCollection = Firebase.firestore.collection("users")
 
     private var idStock: String? = null
     private var name: String? = null
@@ -34,6 +38,38 @@ class DetailStockActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         progresDialog = ProgressDialog(this)
+
+        if (userId != null) {
+            usersCollection.document(userId).get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        // Retrieve the role from the document
+                        val role = documentSnapshot.getLong("role")
+                        if (role != null) {
+                            Log.d("TAG_Role", "role: $role")
+                            // Use '==' for comparison, '=' is for assignment
+                            if (role.toInt() == 1) {
+                                binding.btnUpdate.visibility = View.VISIBLE
+                                binding.btnDelete.visibility = View.VISIBLE
+                            } else if (role.toInt() == 2) {
+                                binding.btnUpdate.visibility = View.GONE
+                                binding.btnDelete.visibility = View.GONE
+                            } else {
+                                Log.e("TAG", "Invalid role value: $role")
+                            }
+                        } else {
+                            Log.e("TAG", "Role field is null")
+                        }
+                    } else {
+                        Log.e("TAG", "User document does not exist")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("TAG", "Error getting user document: $e")
+                }
+        } else {
+            Log.e("TAG", "User ID is null")
+        }
 
         idStock = intent.getStringExtra("id")
         if (idStock != null) {
