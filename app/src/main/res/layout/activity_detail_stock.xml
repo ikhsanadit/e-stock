@@ -87,7 +87,7 @@
             <TextView
                 android:padding="3dip"
                 android:textColor="@color/black"
-                android:text="@string/gpm" />
+                android:text="@string/GPM" />
 
             <TextView
                 android:id="@+id/tv_gpm"
@@ -102,7 +102,7 @@
             <TextView
                 android:padding="3dip"
                 android:textColor="@color/black"
-                android:text="@string/npm" />
+                android:text="@string/NPM" />
 
             <TextView
                 android:id="@+id/tv_npm"
@@ -117,7 +117,7 @@
             <TextView
                 android:padding="3dip"
                 android:textColor="@color/black"
-                android:text="@string/roe" />
+                android:text="@string/ROE" />
 
             <TextView
                 android:id="@+id/tv_roe"
@@ -132,7 +132,7 @@
             <TextView
                 android:padding="3dip"
                 android:textColor="@color/black"
-                android:text="@string/der" />
+                android:text="@string/DER" />
 
             <TextView
                 android:id="@+id/tv_der"

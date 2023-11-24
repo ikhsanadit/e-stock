@@ -21,10 +21,6 @@
     <string name="add_stock">Tambah Saham</string>
     <string name="company_name">Nama Perusahaan</string>
     <string name="company_code">Kode</string>
-    <string name="gpm">GPM</string>
-    <string name="npm">NPM</string>
-    <string name="roe">ROE</string>
-    <string name="der">DER</string>
     <string name="add">Tambah</string>
     <string name="stock_data">Data Saham</string>
     <string name="save">Simpan</string>
@@ -66,4 +62,8 @@
     <string name="score">score</string>
     <string name="notfound">tidak ada data ditemukan, silahkan tambahkan dahulu</string>
     <string name="result_score">Hasil Perangkingan</string>
+    <string name="DER">Debt to Equity Ratio</string>
+    <string name="ROE">Return On Equity</string>
+    <string name="NPM">Net Profit Margin</string>
+    <string name="GPM">Gross Profit Margin</string>
 </resources>

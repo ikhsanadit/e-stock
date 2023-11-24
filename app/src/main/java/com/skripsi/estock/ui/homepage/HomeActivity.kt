@@ -110,6 +110,11 @@ class HomeActivity : AppCompatActivity() {
                         }
                         Log.d("TAG_ambil", "${document.id} => ${document.data}")
                     }
+                    list.sortByDescending { it.gpm.gpm_stock }
+                    list.sortByDescending { it.npm.npm_stock }
+                    list.sortByDescending { it.roe.roe_stock }
+                    list.sortBy { it.der.der_stock }
+
                     stockAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(applicationContext, "Data gagal di ambil!", Toast.LENGTH_SHORT).show()

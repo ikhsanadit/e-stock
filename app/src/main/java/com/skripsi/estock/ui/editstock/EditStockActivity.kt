@@ -85,8 +85,8 @@ class EditStockActivity : AppCompatActivity() {
                 val updatedIntent = Intent(this, DetailStockActivity::class.java)
                 updatedIntent.putExtra("id", idStock)
                 startActivity(updatedIntent)
-                progressDialog.dismiss()
                 finish()
+                progressDialog.dismiss()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Gagal mengubah data", Toast.LENGTH_SHORT).show()

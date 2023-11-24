@@ -89,8 +89,6 @@ class DetailStockActivity : AppCompatActivity() {
                     val roeStock = detailCompany.roe.roe_stock
                     val derStock = detailCompany.der.der_stock
 
-
-
                 } else {
                     // Handle case where the document does not exist
                 }
@@ -111,7 +109,7 @@ class DetailStockActivity : AppCompatActivity() {
                 update.putExtra("roe", croeStock)
                 update.putExtra("der", cderStock)
                 startActivity(update)
-                //finish()
+                finish()
             }
             btnDelete.setSafeOnClickListener {
                 deleteStock()

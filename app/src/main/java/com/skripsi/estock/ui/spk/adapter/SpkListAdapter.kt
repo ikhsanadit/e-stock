@@ -12,8 +12,6 @@ internal class SpkListAdapter (private val listStock: List<DetailCompany>) : Rec
     inner class SpkListAdapters(val binding: ItemSpkBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    var listener: SpkClickListener? = null
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpkListAdapters {
         val binding =
             ItemSpkBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -37,7 +35,4 @@ internal class SpkListAdapter (private val listStock: List<DetailCompany>) : Rec
         }
     }
 
-    interface SpkClickListener {
-        fun onCardDetailClicked(id: String?)
-    }
 }
