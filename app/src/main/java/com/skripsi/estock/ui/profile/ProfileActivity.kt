@@ -49,9 +49,9 @@ class ProfileActivity : AppCompatActivity() {
                             Log.d("TAG_Role", "role: $role")
                             // Use '==' for comparison, '=' is for assignment
                             if (role.toInt() == 1) {
-                                binding.tvRole.text = "Admin"
+                                binding.tvRole.text = "Pakar Saham"
                             } else if (role.toInt() == 2) {
-                                binding.tvRole.text = "User"
+                                binding.tvRole.text = "Investor Awam"
                             } else {
                                 Log.e("TAG", "Invalid role value: $role")
                             }

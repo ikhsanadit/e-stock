@@ -1,5 +1,6 @@
 package com.skripsi.estock.ui.editstock
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -37,8 +38,27 @@ class EditStockActivity : AppCompatActivity() {
         setupDataFields()
 
         binding.btnSave.setSafeOnClickListener {
+            showEditConfirmation()
+        }
+    }
+
+    fun showEditConfirmation() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Konfirmasi Edit")
+        builder.setMessage("Apakah kamu yakin akan merubah data saham ini?")
+
+        // Set up the buttons
+        builder.setPositiveButton("Edit") { dialog, which ->
+            // User clicked Delete button
             updateData()
         }
+
+        builder.setNegativeButton("Batal") { dialog, which ->
+            // User clicked Cancel button
+            Toast.makeText(this, "Batal Menghapus", Toast.LENGTH_SHORT).show()
+        }
+
+        builder.show()
     }
 
     private fun updateData() {

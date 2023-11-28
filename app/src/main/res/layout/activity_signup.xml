@@ -97,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Admin"
+                android:text="Pakar Saham"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="User"
+                android:text="Investor Awam"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />

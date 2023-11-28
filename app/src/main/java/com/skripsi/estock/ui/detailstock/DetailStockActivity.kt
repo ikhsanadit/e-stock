@@ -1,5 +1,6 @@
 package com.skripsi.estock.ui.detailstock
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -112,9 +113,28 @@ class DetailStockActivity : AppCompatActivity() {
                 finish()
             }
             btnDelete.setSafeOnClickListener {
-                deleteStock()
+                showDeleteConfirmation()
             }
         }
+    }
+
+    fun showDeleteConfirmation() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Konfirmasi Hapus")
+        builder.setMessage("Apakah kamu yakin akan menghapus saham ini?")
+
+        // Set up the buttons
+        builder.setPositiveButton("Hapus") { dialog, which ->
+            // User clicked Delete button
+            deleteStock()
+        }
+
+        builder.setNegativeButton("Batal") { dialog, which ->
+            // User clicked Cancel button
+            Toast.makeText(this, "Batal Menghapus", Toast.LENGTH_SHORT).show()
+        }
+
+        builder.show()
     }
 
     private fun deleteStock() {
