@@ -49,7 +49,6 @@ class EditStockActivity : AppCompatActivity() {
 
         // Set up the buttons
         builder.setPositiveButton("Edit") { dialog, which ->
-            // User clicked Delete button
             updateData()
         }
 

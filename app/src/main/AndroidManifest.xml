@@ -21,86 +21,94 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Estock"
         tools:targetApi="31">
+
         <activity
             android:name=".ui.spk.SpkActivity"
-            android:launchMode="standard"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="standard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.detailstock.DetailStockActivity"
+            android:exported="false"
             android:launchMode="standard"
-            android:taskAffinity="com.some.task.affinity"
-            android:exported="false">
+            android:taskAffinity="com.some.task.affinity">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value=""
-                 />
+                android:value="" />
         </activity>
         <activity
             android:name=".ui.criteria.CriteriaActivity"
-            android:launchMode="standard"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="standard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.profile.ProfileActivity"
-            android:launchMode="standard"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="standard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.editstock.EditStockActivity"
+            android:exported="false"
             android:launchMode="standard"
-            android:taskAffinity="com.some.task.affinity"
-            android:exported="false">
+            android:taskAffinity="com.some.task.affinity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.addstock.AddStockActivity"
+            android:exported="false"
             android:launchMode="standard"
-            android:taskAffinity="com.some.task.affinity"
-            android:exported="false">
+            android:taskAffinity="com.some.task.affinity">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value=""/>
+                android:value="" />
         </activity>
         <activity
             android:name=".ui.stockchart.StockChartActivity"
-            android:launchMode="standard"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="standard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.signup.SignupActivity"
-            android:launchMode="standard"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="standard">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.login.ForgetPasswordActivity"
+            android:exported="false"
+            android:launchMode="standard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:launchMode="standard"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="standard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.homepage.HomeActivity"
-            android:launchMode="standard"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="standard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

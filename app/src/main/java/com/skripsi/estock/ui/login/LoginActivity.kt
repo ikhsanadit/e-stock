@@ -44,6 +44,9 @@ class LoginActivity : AppCompatActivity() {
             btnSignup.setSafeOnClickListener {
                 startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
             }
+            btnForget.setSafeOnClickListener {
+                startActivity(Intent(this@LoginActivity, ForgetPasswordActivity::class.java))
+            }
         }
     }
 

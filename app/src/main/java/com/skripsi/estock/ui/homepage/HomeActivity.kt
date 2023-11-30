@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -29,11 +30,48 @@ class HomeActivity : AppCompatActivity() {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val firestoreDb = Firebase.firestore
 
+    private val userId = FirebaseAuth.getInstance().currentUser?.uid
+    private val usersCollection = Firebase.firestore.collection("users")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        if (userId != null) {
+            usersCollection.document(userId).get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        // Retrieve the role from the document
+                        val role = documentSnapshot.getLong("role")
+                        if (role != null) {
+                            Log.d("TAG_Role", "role: $role")
+                            // Use '==' for comparison, '=' is for assignment
+                            if (role.toInt() == 1) {
+                                binding.cvBtnResults.visibility = View.VISIBLE
+                                binding.cvBtnCriteria.visibility = View.VISIBLE
+                                binding.cvBtnStock.visibility = View.VISIBLE
+                            } else if (role.toInt() == 2) {
+                                binding.cvBtnResults.visibility = View.VISIBLE
+                                binding.cvBtnCriteria.visibility = View.GONE
+                                binding.cvBtnStock.visibility = View.VISIBLE
+                            } else {
+                                Log.e("TAG", "Invalid role value: $role")
+                            }
+                        } else {
+                            Log.e("TAG", "Role field is null")
+                        }
+                    } else {
+                        Log.e("TAG", "User document does not exist")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("TAG", "Error getting user document: $e")
+                }
+        } else {
+            Log.e("TAG", "User ID is null")
+        }
 
         val fullName = binding.tvUserName
 

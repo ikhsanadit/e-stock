@@ -22,8 +22,6 @@ class DetailStockActivity : AppCompatActivity() {
     private lateinit var progresDialog: ProgressDialog
 
     private val firestoreDb = Firebase.firestore
-    private val userId = FirebaseAuth.getInstance().currentUser?.uid
-    private val usersCollection = Firebase.firestore.collection("users")
 
     private var idStock: String? = null
     private var name: String? = null
@@ -40,37 +38,6 @@ class DetailStockActivity : AppCompatActivity() {
 
         progresDialog = ProgressDialog(this)
 
-        if (userId != null) {
-            usersCollection.document(userId).get()
-                .addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-                        // Retrieve the role from the document
-                        val role = documentSnapshot.getLong("role")
-                        if (role != null) {
-                            Log.d("TAG_Role", "role: $role")
-                            // Use '==' for comparison, '=' is for assignment
-                            if (role.toInt() == 1) {
-                                binding.btnUpdate.visibility = View.VISIBLE
-                                binding.btnDelete.visibility = View.VISIBLE
-                            } else if (role.toInt() == 2) {
-                                binding.btnUpdate.visibility = View.GONE
-                                binding.btnDelete.visibility = View.GONE
-                            } else {
-                                Log.e("TAG", "Invalid role value: $role")
-                            }
-                        } else {
-                            Log.e("TAG", "Role field is null")
-                        }
-                    } else {
-                        Log.e("TAG", "User document does not exist")
-                    }
-                }
-                .addOnFailureListener { e ->
-                    Log.e("TAG", "Error getting user document: $e")
-                }
-        } else {
-            Log.e("TAG", "User ID is null")
-        }
 
         idStock = intent.getStringExtra("id")
         if (idStock != null) {

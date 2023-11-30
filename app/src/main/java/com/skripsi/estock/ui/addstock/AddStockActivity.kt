@@ -55,8 +55,8 @@ class AddStockActivity : AppCompatActivity() {
         companyDer: String
     ): Boolean {
         return companyName.isNotEmpty() && companyCode.isNotEmpty() &&
-                companyGpm.toString().isNotEmpty() && companyNpm.toString().isNotEmpty() &&
-                companyRoe.toString().isNotEmpty() && companyDer.toString().isNotEmpty()
+                companyGpm.isNotEmpty() && companyNpm.isNotEmpty() &&
+                companyRoe.isNotEmpty() && companyDer.isNotEmpty()
     }
 
     private fun calculateSpk(value: Double): Int {

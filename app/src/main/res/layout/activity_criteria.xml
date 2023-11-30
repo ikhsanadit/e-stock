@@ -174,13 +174,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="Nilai"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
                 </TableRow>
 
                 <TableRow
@@ -197,14 +190,6 @@
                         android:gravity="start"
                         android:padding="3dip"
                         android:text="@string/low"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -227,14 +212,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="2"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
                 </TableRow>
 
                 <TableRow
@@ -251,14 +228,6 @@
                         android:gravity="start"
                         android:padding="3dip"
                         android:text="@string/high"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="3"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -307,13 +276,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="Nilai"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
                 </TableRow>
 
                 <TableRow
@@ -330,14 +292,6 @@
                         android:gravity="start"
                         android:padding="3dip"
                         android:text="@string/low"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -360,14 +314,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="2"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
                 </TableRow>
 
                 <TableRow
@@ -384,14 +330,6 @@
                         android:gravity="start"
                         android:padding="3dip"
                         android:text="@string/high"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="3"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -440,13 +378,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="Nilai"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
                 </TableRow>
 
                 <TableRow
@@ -463,14 +394,6 @@
                         android:gravity="start"
                         android:padding="3dip"
                         android:text="@string/low"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -493,14 +416,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="2"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
                 </TableRow>
 
                 <TableRow
@@ -520,14 +435,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="3"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
                 </TableRow>
 
             </TableLayout>
@@ -537,7 +444,7 @@
                 android:layout_width="354dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Bobot Kriteria DER"
+                android:text="Kriteria DER"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -575,13 +482,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="Nilai"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
                 </TableRow>
 
                 <TableRow
@@ -598,14 +498,6 @@
                         android:gravity="start"
                         android:padding="3dip"
                         android:text="@string/high"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="3"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -628,13 +520,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="2"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
 
                 </TableRow>
 
@@ -652,14 +537,6 @@
                         android:gravity="start"
                         android:padding="3dip"
                         android:text="@string/low"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:padding="3dip"
-                        android:text="1"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 

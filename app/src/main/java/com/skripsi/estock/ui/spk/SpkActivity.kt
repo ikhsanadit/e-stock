@@ -66,8 +66,42 @@ class SpkActivity : AppCompatActivity(){
         supportActionBar?.hide()
         progresDialog = ProgressDialog(this)
         progresDialog.setMessage("Silahkan Tunggu")
-        getData()
 
+        if (userId != null) {
+            usersCollection.document(userId).get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        // Retrieve the role from the document
+                        val role = documentSnapshot.getLong("role")
+                        if (role != null) {
+                            Log.d("TAG_Role", "role: $role")
+                            // Use '==' for comparison, '=' is for assignment
+                            if (role.toInt() == 1) {
+                                binding.tbTableCriteria.visibility = View.VISIBLE
+                                binding.tvEdit.visibility = View.VISIBLE
+                                binding.tvWeight.visibility = View.VISIBLE
+                            } else if (role.toInt() == 2) {
+                                binding.tbTableCriteria.visibility = View.GONE
+                                binding.tvEdit.visibility = View.GONE
+                                binding.tvWeight.visibility = View.GONE
+                            } else {
+                                Log.e("TAG", "Invalid role value: $role")
+                            }
+                        } else {
+                            Log.e("TAG", "Role field is null")
+                        }
+                    } else {
+                        Log.e("TAG", "User document does not exist")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("TAG", "Error getting user document: $e")
+                }
+        } else {
+            Log.e("TAG", "User ID is null")
+        }
+
+        getData()
 
 
         binding.tvEdit.setSafeOnClickListener {
@@ -82,6 +116,7 @@ class SpkActivity : AppCompatActivity(){
     }
 
     private fun spkSAWandTOPSISMethod() {
+        progresDialog.show()
         firestoreDb.collection("criteria weight")
             .document(wId)
             .get()
@@ -150,26 +185,42 @@ class SpkActivity : AppCompatActivity(){
                                             alternatif.gpmSpkNormalisasi = alternatif.gpm.gpm_spk!!.toDouble() / maxC1!!
                                             alternatif.npmSpkNormalisasi = alternatif.npm.npm_spk!!.toDouble() / maxC2!!
                                             alternatif.roeSpkNormalisasi = alternatif.roe.roe_spk!!.toDouble() / maxC3!!
+
+                                            Log.d("TAG_Gpm", "gpm Ternormalisasi: ${alternatif.gpmSpkNormalisasi}")
+                                            Log.d("TAG_Npm", "npm Ternormalisasi: ${alternatif.npmSpkNormalisasi}")
+                                            Log.d("TAG_Roe", "roe Ternormalisasi: ${alternatif.roeSpkNormalisasi}")
+                                            Log.d("TAG_Der", "der Ternormalisasi: ${alternatif.derSpkNormalisasi}")
+
                                         }
                                         // pembobotan
+                                        Log.d("TAG_bobot", "bobot spk: $bobotC1 $bobotC2 $bobotC3 $bobotC4")
                                         for (i in alternatifList.indices) {
                                             alternatifList[i].c1xW = alternatifList[i].gpmSpkNormalisasi * bobotC1
                                             alternatifList[i].c2xW = alternatifList[i].npmSpkNormalisasi * bobotC2
                                             alternatifList[i].c3xW = alternatifList[i].roeSpkNormalisasi * bobotC3
                                             alternatifList[i].c4xW = alternatifList[i].derSpkNormalisasi * bobotC4
+
+                                            Log.d("TAG_Gpm", "gpm Terbobot: ${alternatifList[i].c1xW}")
+                                            Log.d("TAG_Npm", "npm Terbobot: ${alternatifList[i].c2xW}")
+                                            Log.d("TAG_Roe", "roe Terbobot: ${alternatifList[i].c3xW}")
+                                            Log.d("TAG_Der", "der Terbobot: ${alternatifList[i].c4xW}")
                                         }
-                                        Log.d("TAG_bobotc1", "spkSAWandTOPSISMethod: $bobotC1")
+
                                         //Solusi ideal positif
                                         val maxC1 = alternatifList.maxOf { it.c1xW }
                                         val maxC2 = alternatifList.maxOf { it.c2xW }
                                         val maxC3 = alternatifList.maxOf { it.c3xW }
                                         val minC4 = alternatifList.minOf { it.c4xW }
+
+                                        Log.d("TAG_Solusi_Ideal Positif", "C1:$maxC1, C2:$maxC2, C3:$maxC3, C4:$minC4 ")
+
                                         //Solusi ideal negatif
                                         val minC1 = alternatifList.minOf { it.c1xW }
                                         val minC2 = alternatifList.minOf { it.c2xW }
                                         val minC3 = alternatifList.minOf { it.c3xW }
                                         val maxC4 = alternatifList.maxOf { it.c4xW }
 
+                                        Log.d("TAG_Solusi_Ideal negatif", "C1:$minC1, C2:$minC2, C3:$minC3, C4:$maxC4 ")
 
                                         for (alternatif in alternatifList) {
                                             val derX = (alternatif.c4xW - minC4).pow(2)
@@ -178,6 +229,7 @@ class SpkActivity : AppCompatActivity(){
                                             val roeX = (alternatif.c3xW - maxC3).pow(2)
 
                                             val rSolutionX = sqrt(gpmX + npmX + roeX + derX)
+                                            Log.d("TAG_jarakpositif", "jarak solusi ideal positif: $rSolutionX")
 
                                             val derY = (alternatif.c4xW - maxC4).pow(2)
                                             val gpmY = (alternatif.c1xW - minC1).pow(2)
@@ -185,6 +237,7 @@ class SpkActivity : AppCompatActivity(){
                                             val roeY = (alternatif.c3xW - minC3).pow(2)
 
                                             val rSolutionY = sqrt(gpmY + npmY + roeY + derY)
+                                            Log.d("TAG_jaraknegatif", "jarak solusi ideal negatif: $rSolutionY")
 
                                             alternatif.nilaiPreferensi = rSolutionY / (rSolutionX + rSolutionY)
                                             Log.d("TAG sc", "sc: ${alternatif.nilaiPreferensi}")
@@ -441,18 +494,21 @@ class SpkActivity : AppCompatActivity(){
                     "roe_weight" to cweightC3,
                     "der_weight" to cweightC4
                 )
-
+                progresDialog.show()
                 firestoreDb.collection("criteria weight")
                     .document(wId)
                     .update(criteriaWeight as Map<String, Any>)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Berhasil merubah bobot", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, SpkActivity::class.java))
-                        finish()
+                        progresDialog.dismiss()
+                        customDialog.dismiss()
+                        recreate()
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(this, "Gagal merubah bobot", Toast.LENGTH_SHORT).show()
                         Log.w("TAG", "Error updating document", e)
+                        progresDialog.dismiss()
                     }
             } else {
                 Toast.makeText(this, "Total jumlah bobot harus 100%", Toast.LENGTH_SHORT).show()

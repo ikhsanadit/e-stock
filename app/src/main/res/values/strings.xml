@@ -12,7 +12,7 @@
     <string name="criteria_chart">Daftar Kriteria</string>
     <string name="result">Hasil Perangkingan</string>
     <string name="username">Username</string>
-    <string name="password">Password</string>
+    <string name="password">Kata Sandi</string>
     <string name="greeting_login">Masuk</string>
     <string name="create_account">Buat Akun</string>
     <string name="email">Email</string>
@@ -34,7 +34,7 @@
     <string name="avg">Sedang</string>
     <string name="low">Rendah</string>
     <string name="high">Tinggi</string>
-    <string name="bobot_gpm">Bobot Kriteria GPM</string>
+    <string name="bobot_gpm">Kriteria GPM</string>
     <string name="gpm_long">Gross Profit Margin (GPM)</string>
     <string name="gpm_ket">Rasio yang digunakan untuk menghitung persentase pendapatan yang tersisa setelah perusahaan membayar harga pokok produksi atau harga pokok penjualan, semakin tinggi GPM, semakin menguntungkan perusahaan.</string>
     <string name="npm_long">Net Profit Margin (NPM)</string>
@@ -44,8 +44,8 @@
     <string name="der_long">Debt to Equity Ratio (DER)</string>
     <string name="der_ket">Rasio keuangan mencerminkan hubungan antara arus kas perusahaan dan hutang yang digunakan untuk membiayai asetnya</string>
     <string name="whats_criteria">Kriteria diperlukan dalam perhitungan Sistem Pendukung Keputusan berikut kriteria yang digunakan dalam penelitian ini:</string>
-    <string name="bobot_npm">Bobot Kriteria NPM</string>
-    <string name="bobot_roe">Bobot Kriteria ROE</string>
+    <string name="bobot_npm">Kriteria NPM</string>
+    <string name="bobot_roe">Kriteria ROE</string>
     <string name="gpm_short"><![CDATA[<= 10%]]></string>
     <string name="gpm_avg">10,1% - 40%</string>
     <string name="gpm_heigh"><![CDATA[>= 40,1%]]></string>
@@ -66,4 +66,13 @@
     <string name="ROE">Return On Equity</string>
     <string name="NPM">Net Profit Margin</string>
     <string name="GPM">Gross Profit Margin</string>
+    <string name="title_activity_forget_password">ForgetPasswordActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

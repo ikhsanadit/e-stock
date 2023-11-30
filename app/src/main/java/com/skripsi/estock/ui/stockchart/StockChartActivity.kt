@@ -27,8 +27,6 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
     private var list: MutableList<DetailCompany> = mutableListOf()
 
     private val firestoreDb = Firebase.firestore
-    private val userId = FirebaseAuth.getInstance().currentUser?.uid
-    private val usersCollection = Firebase.firestore.collection("users")
 
     private val stockIdMap: MutableMap<String, String> = mutableMapOf()
 
@@ -43,36 +41,6 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
         progresDialog = ProgressDialog(this)
         progresDialog.setMessage("Mengambil data")
 
-        if (userId != null) {
-            usersCollection.document(userId).get()
-                .addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-                        // Retrieve the role from the document
-                        val role = documentSnapshot.getLong("role")
-                        if (role != null) {
-                            Log.d("TAG_Role", "role: $role")
-                            // Use '==' for comparison, '=' is for assignment
-                            if (role.toInt() == 1) {
-                                binding.btnAdd.visibility = View.VISIBLE
-                            } else if (role.toInt() == 2) {
-                                binding.btnAdd.visibility = View.GONE
-                            } else {
-                                Log.e("TAG", "Invalid role value: $role")
-                            }
-                        } else {
-                            Log.e("TAG", "Role field is null")
-                        }
-                    } else {
-                        Log.e("TAG", "User document does not exist")
-                    }
-                }
-                .addOnFailureListener { e ->
-                    Log.e("TAG", "Error getting user document: $e")
-                }
-        } else {
-            Log.e("TAG", "User ID is null")
-        }
-
         stockAdapter = StockListAdapter(list)
         stockAdapter.listener = this
 
@@ -82,7 +50,7 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
         binding.apply {
             btnAdd.setSafeOnClickListener {
                 startActivity(Intent(this@StockChartActivity, AddStockActivity::class.java))
-                //finish()
+                finish()
             }
         }
 

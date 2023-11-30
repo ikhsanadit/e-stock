@@ -97,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Pakar Saham"
+                android:text="Admin"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
