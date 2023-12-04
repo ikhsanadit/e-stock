@@ -325,10 +325,10 @@ class SpkActivity : AppCompatActivity(){
                         }
                         Log.d("TAG_ambil", "${document.id} => ${document.data}")
                     }
-                    list.sortByDescending { it.gpm.gpm_stock }
-                    list.sortByDescending { it.npm.npm_stock }
-                    list.sortByDescending { it.roe.roe_stock }
-                    list.sortBy { it.der.der_stock }
+                    list.sortWith(compareByDescending<DetailCompany> { it.gpm.gpm_spk }
+                        .thenByDescending { it.npm.npm_spk }
+                        .thenByDescending { it.roe.roe_spk }
+                        .thenBy { it.der.der_spk })
 
                     stockAdapter.notifyDataSetChanged()
                     binding.tvSpk.visibility = View.INVISIBLE
