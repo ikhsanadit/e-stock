@@ -221,7 +221,7 @@ class SpkActivity : AppCompatActivity(){
                                         val maxC4 = alternatifList.maxOf { it.c4xW }
 
                                         Log.d("TAG_Solusi_Ideal negatif", "C1:$minC1, C2:$minC2, C3:$minC3, C4:$maxC4 ")
-
+                                        // Jarak solusi ideal positif dan negatif
                                         for (alternatif in alternatifList) {
                                             val derX = (alternatif.c4xW - minC4).pow(2)
                                             val gpmX = (alternatif.c1xW - maxC1).pow(2)
@@ -242,6 +242,25 @@ class SpkActivity : AppCompatActivity(){
                                             alternatif.nilaiPreferensi = rSolutionY / (rSolutionX + rSolutionY)
                                             Log.d("TAG sc", "sc: ${alternatif.nilaiPreferensi}")
                                         }
+//                                        var gpmN = 0.0
+//                                        var npmN = 0.0
+//                                        var roeN = 0.0
+//                                        var derNormalisasi = 0.0
+//
+//                                        var gpmNTb = 0.0
+//                                        var npmNTb = 0.0
+//                                        var roeNTb = 0.0
+//                                        var derNTb = 0.0
+//
+//                                        var gpmPlus = 0.0
+//                                        var npmPlus = 0.0
+//                                        var roePlus = 0.0
+//                                        var derPlus = 0.0
+//
+//                                        var gpmMinus = 0.0
+//                                        var npmMinus = 0.0
+//                                        var roeMinus = 0.0
+//                                        var derMinus = 0.0
 
                                         var score = 0.0
                                         for (i in alternatifList.indices){
@@ -325,10 +344,10 @@ class SpkActivity : AppCompatActivity(){
                         }
                         Log.d("TAG_ambil", "${document.id} => ${document.data}")
                     }
-                    list.sortWith(compareByDescending<DetailCompany> { it.gpm.gpm_spk }
-                        .thenByDescending { it.npm.npm_spk }
-                        .thenByDescending { it.roe.roe_spk }
-                        .thenBy { it.der.der_spk })
+//                    list.sortWith(compareByDescending<DetailCompany> { it.gpm.gpm_spk }
+//                        .thenByDescending { it.npm.npm_spk }
+//                        .thenByDescending { it.roe.roe_spk }
+//                        .thenBy { it.der.der_spk })
 
                     stockAdapter.notifyDataSetChanged()
                     binding.tvSpk.visibility = View.INVISIBLE

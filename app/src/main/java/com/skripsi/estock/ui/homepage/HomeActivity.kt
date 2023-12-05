@@ -148,10 +148,10 @@ class HomeActivity : AppCompatActivity() {
                         }
                         Log.d("TAG_ambil", "${document.id} => ${document.data}")
                     }
-                    list.sortWith(compareByDescending<DetailCompany> { it.gpm.gpm_spk }
-                        .thenByDescending { it.npm.npm_spk }
-                        .thenByDescending { it.roe.roe_spk }
-                        .thenBy { it.der.der_spk })
+//                    list.sortWith(compareByDescending<DetailCompany> { it.gpm.gpm_spk }
+//                        .thenByDescending { it.npm.npm_spk }
+//                        .thenByDescending { it.roe.roe_spk }
+//                        .thenBy { it.der.der_spk })
 
                     stockAdapter.notifyDataSetChanged()
                 } else {
