@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
@@ -22,7 +21,6 @@ import com.skripsi.estock.databinding.DialogCriteriaBinding
 import com.skripsi.estock.datasource.model.*
 import com.skripsi.estock.setSafeOnClickListener
 import com.skripsi.estock.ui.spk.adapter.SpkListAdapter
-import com.skripsi.estock.ui.stockchart.StockChartActivity
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -245,7 +243,7 @@ class SpkActivity : AppCompatActivity(){
 //                                        var gpmN = 0.0
 //                                        var npmN = 0.0
 //                                        var roeN = 0.0
-//                                        var derNormalisasi = 0.0
+//                                        var derN = 0.0
 //
 //                                        var gpmNTb = 0.0
 //                                        var npmNTb = 0.0
