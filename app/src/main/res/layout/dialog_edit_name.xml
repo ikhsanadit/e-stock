@@ -12,7 +12,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rubah Kata Sandi"
+        android:text="Rubah Nama"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"

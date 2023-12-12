@@ -52,7 +52,7 @@ class ForgetPasswordActivity : AppCompatActivity() {
         builder.setMessage("Apakah kamu yakin akan merubah kata sandi?")
 
         // Set up the buttons
-        builder.setPositiveButton("Hapus") { dialog, which ->
+        builder.setPositiveButton("Ya") { dialog, which ->
             // User clicked button
             FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener{
                 if (it.isSuccessful){

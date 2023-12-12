@@ -171,7 +171,7 @@ class SpkActivity : AppCompatActivity(){
                                     }
 
                                     if (alternatifList.isNotEmpty()) {
-
+                                        //normalisasi
                                         for (alternatif in alternatifList) {
                                             val minC4 = alternatifList.minByOrNull { it.der.der_spk!!.toDouble() }?.der?.der_spk!!.toDouble()
                                             alternatif.derSpkNormalisasi = minC4!! / alternatif.der.der_spk!!.toDouble()
