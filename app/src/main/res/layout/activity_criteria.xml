@@ -134,6 +134,182 @@
             </TableLayout>
 
             <TextView
+                android:id="@+id/tv_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Bobot kriteria"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/tb_table_criteria"
+                app:layout_constraintTop_toBottomOf="@id/tb_table_criteria" />
+
+            <TextView
+                android:id="@+id/tv_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Rubah bobot kriteria >"
+                android:textColor="#03A9F4"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tb_table_criterias"
+                app:layout_constraintEnd_toEndOf="@+id/tb_table_criterias"
+                app:layout_constraintTop_toBottomOf="@id/tb_table_criteria" />
+
+            <TableLayout
+                android:id="@+id/tb_table_criterias"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_weight" >
+
+                <TableRow
+                    android:background="#0079D6"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:padding="3dip"
+                        android:text="@string/cr"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/atr_cr"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/cr_w"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/GPM"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/benefit"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_w_gpm"
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        tools:text="0,5"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/NPM"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/benefit"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_w_npm"
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        tools:text="0,2"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/ROE"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/benefit"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_w_roe"
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        tools:text="0,2"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="#DAE8FC"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="@string/DER"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:gravity="start"
+                        android:padding="3dip"
+                        android:text="@string/cost"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_w_der"
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:padding="3dip"
+                        tools:text="0,1"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
                 android:id="@+id/tv_sub_criteria_1"
                 android:layout_width="354dp"
                 android:layout_height="wrap_content"
@@ -144,7 +320,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tb_table_criteria" />
+                app:layout_constraintTop_toBottomOf="@+id/tb_table_criterias" />
 
             <TableLayout
                 android:id="@+id/tb_table_sub_criteria_1"

@@ -40,194 +40,81 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/tv_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Bobot kriteria"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tb_table_criteria"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
-
-    <TextView
-        android:id="@+id/tv_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Rubah bobot kriteria >"
-        android:textColor="#03A9F4"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tb_table_criteria"
-        app:layout_constraintEnd_toEndOf="@+id/tb_table_criteria"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
-
-    <TableLayout
-        android:id="@+id/tb_table_criteria"
-        android:layout_width="354dp"
-        android:layout_height="wrap_content"
-        android:stretchColumns="1"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weight" >
-
-        <TableRow
-            android:background="#0079D6"
-            android:padding="2dp">
-
-            <TextView
-                android:layout_width="100dp"
-                android:padding="3dip"
-                android:text="@string/cr"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:gravity="start"
-                android:padding="3dip"
-                android:text="@string/atr_cr"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:gravity="start"
-                android:padding="3dip"
-                android:text="@string/cr_w"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-        </TableRow>
-
-        <TableRow
-            android:background="#DAE8FC"
-            android:padding="2dp">
-
-            <TextView
-                android:padding="3dip"
-                android:text="@string/GPM"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:gravity="start"
-                android:padding="3dip"
-                android:text="@string/benefit"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_w_gpm"
-                android:layout_width="100dp"
-                android:gravity="start"
-                android:padding="3dip"
-                tools:text="0,5"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:background="#DAE8FC"
-            android:padding="2dp">
-
-            <TextView
-                android:padding="3dip"
-                android:text="@string/NPM"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:gravity="start"
-                android:padding="3dip"
-                android:text="@string/benefit"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_w_npm"
-                android:layout_width="100dp"
-                android:gravity="start"
-                android:padding="3dip"
-                tools:text="0,2"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:background="#DAE8FC"
-            android:padding="2dp">
-
-            <TextView
-                android:padding="3dip"
-                android:text="@string/ROE"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:gravity="start"
-                android:padding="3dip"
-                android:text="@string/benefit"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_w_roe"
-                android:layout_width="100dp"
-                android:gravity="start"
-                android:padding="3dip"
-                tools:text="0,2"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:background="#DAE8FC"
-            android:padding="2dp">
-
-            <TextView
-                android:padding="3dip"
-                android:text="@string/DER"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:gravity="start"
-                android:padding="3dip"
-                android:text="@string/cost"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_w_der"
-                android:layout_width="100dp"
-                android:gravity="start"
-                android:padding="3dip"
-                tools:text="0,1"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-        </TableRow>
-
-    </TableLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_stock"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="550dp"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb_table_criteria"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:listitem="@layout/item_spk" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_stock"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_list_stock">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#0079D6"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_inf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Dari Hasil Perhitungan Sistem Pendukung Keputusan dapat disimpulkan bahwa saham perusahaan:" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_inf"
+                tools:text="@string/name" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_name"
+                android:text="Menjadi prioritas dengan skor tertinggi sebagai saran investasi saham. " />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,14 +32,6 @@ class SpkActivity : AppCompatActivity(){
     private var list: MutableList<DetailCompany> = mutableListOf()
     private val alternatifList: MutableList<DetailCompany> = mutableListOf()
     private var idStock: String? = ""
-    private var listWeight = mutableListOf<String>()
-    private var weightC1 = ""
-    private var weightC2 = ""
-    private var weightC3 = ""
-    private var weightC4 = ""
-
-    private val userId = FirebaseAuth.getInstance().currentUser?.uid
-    private val usersCollection = Firebase.firestore.collection("users")
 
     private val firestoreDb = Firebase.firestore
 
@@ -65,46 +57,7 @@ class SpkActivity : AppCompatActivity(){
         progresDialog = ProgressDialog(this)
         progresDialog.setMessage("Silahkan Tunggu")
 
-        if (userId != null) {
-            usersCollection.document(userId).get()
-                .addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-                        // Retrieve the role from the document
-                        val role = documentSnapshot.getLong("role")
-                        if (role != null) {
-                            Log.d("TAG_Role", "role: $role")
-                            // Use '==' for comparison, '=' is for assignment
-                            if (role.toInt() == 1) {
-                                binding.tbTableCriteria.visibility = View.VISIBLE
-                                binding.tvEdit.visibility = View.VISIBLE
-                                binding.tvWeight.visibility = View.VISIBLE
-                            } else if (role.toInt() == 2) {
-                                binding.tbTableCriteria.visibility = View.GONE
-                                binding.tvEdit.visibility = View.GONE
-                                binding.tvWeight.visibility = View.GONE
-                            } else {
-                                Log.e("TAG", "Invalid role value: $role")
-                            }
-                        } else {
-                            Log.e("TAG", "Role field is null")
-                        }
-                    } else {
-                        Log.e("TAG", "User document does not exist")
-                    }
-                }
-                .addOnFailureListener { e ->
-                    Log.e("TAG", "Error getting user document: $e")
-                }
-        } else {
-            Log.e("TAG", "User ID is null")
-        }
-
         getData()
-
-
-        binding.tvEdit.setSafeOnClickListener {
-            showCustomDialog()
-        }
 
         stockAdapter = SpkListAdapter(list)
 
@@ -173,16 +126,16 @@ class SpkActivity : AppCompatActivity(){
                                     if (alternatifList.isNotEmpty()) {
                                         //normalisasi
                                         for (alternatif in alternatifList) {
-                                            val minC4 = alternatifList.minByOrNull { it.der.der_spk!!.toDouble() }?.der?.der_spk!!.toDouble()
-                                            alternatif.derSpkNormalisasi = minC4!! / alternatif.der.der_spk!!.toDouble()
 
                                             val maxC1 = alternatifList.maxByOrNull { it.gpm.gpm_spk!!.toDouble() }?.gpm?.gpm_spk!!.toDouble()
                                             val maxC2 = alternatifList.maxByOrNull { it.npm.npm_spk!!.toDouble() }?.npm?.npm_spk!!.toDouble()
                                             val maxC3 = alternatifList.maxByOrNull { it.roe.roe_spk!!.toDouble() }?.roe?.roe_spk!!.toDouble()
+                                            val minC4 = alternatifList.minByOrNull { it.der.der_spk!!.toDouble() }?.der?.der_spk!!.toDouble()
 
                                             alternatif.gpmSpkNormalisasi = alternatif.gpm.gpm_spk!!.toDouble() / maxC1!!
                                             alternatif.npmSpkNormalisasi = alternatif.npm.npm_spk!!.toDouble() / maxC2!!
                                             alternatif.roeSpkNormalisasi = alternatif.roe.roe_spk!!.toDouble() / maxC3!!
+                                            alternatif.derSpkNormalisasi = minC4!! / alternatif.der.der_spk!!.toDouble()
 
                                             Log.d("TAG_Gpm", "gpm Ternormalisasi: ${alternatif.gpmSpkNormalisasi}")
                                             Log.d("TAG_Npm", "npm Ternormalisasi: ${alternatif.npmSpkNormalisasi}")
@@ -219,7 +172,7 @@ class SpkActivity : AppCompatActivity(){
                                         val maxC4 = alternatifList.maxOf { it.c4xW }
 
                                         Log.d("TAG_Solusi_Ideal negatif", "C1:$minC1, C2:$minC2, C3:$minC3, C4:$maxC4 ")
-                                        // Jarak solusi ideal positif dan negatif
+
                                         for (alternatif in alternatifList) {
                                             val derX = (alternatif.c4xW - minC4).pow(2)
                                             val gpmX = (alternatif.c1xW - maxC1).pow(2)
@@ -234,9 +187,10 @@ class SpkActivity : AppCompatActivity(){
                                             val npmY = (alternatif.c2xW - minC2).pow(2)
                                             val roeY = (alternatif.c3xW - minC3).pow(2)
 
+                                            // Jarak solusi ideal positif dan negatif
                                             val rSolutionY = sqrt(gpmY + npmY + roeY + derY)
                                             Log.d("TAG_jaraknegatif", "jarak solusi ideal negatif: $rSolutionY")
-
+                                            // Kedekatan Relatif / Nilai Preferensi
                                             alternatif.nilaiPreferensi = rSolutionY / (rSolutionX + rSolutionY)
                                             Log.d("TAG sc", "sc: ${alternatif.nilaiPreferensi}")
                                         }
@@ -287,12 +241,6 @@ class SpkActivity : AppCompatActivity(){
                                 progresDialog.dismiss()
                             }
 
-                        binding.apply {
-                            tvWGpm.text = wGpm.toString()
-                            tvWNpm.text = wNpm.toString()
-                            tvWRoe.text = wRoe.toString()
-                            tvWDer.text = wDer.toString()
-                        }
                     }
                     Log.d("TAG_ambil", "${document.id} => ${document.data}")
                     stockAdapter.notifyDataSetChanged()
@@ -348,6 +296,7 @@ class SpkActivity : AppCompatActivity(){
 //                        .thenBy { it.der.der_spk })
 
                     stockAdapter.notifyDataSetChanged()
+                    getResult()
                     binding.tvSpk.visibility = View.INVISIBLE
                 } else {
                     Toast.makeText(applicationContext, "Data gagal di ambil!", Toast.LENGTH_SHORT).show()
@@ -364,177 +313,45 @@ class SpkActivity : AppCompatActivity(){
             }
     }
 
-    private fun showCustomDialog() {
-        var cweightC1 = 0.0
-        var cweightC2 = 0.0
-        var cweightC3 = 0.0
-        var cweightC4 = 0.0
+    private fun getResult(){
+        firestoreDb.collection("detail company")
+            .orderBy("spk_score", Query.Direction.DESCENDING)
+            .limit(1)
+            .get()
+            .addOnCompleteListener { task ->
+                Log.d("TAG task", "isi task: $task ")
+                list.clear()
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        val id = document.id
+                        val name = document.getString("name")
+                        val code = document.getString("code")
+                        val gpmSpk = document.getDouble("gpm.gpm_spk")
+                        val npmSpk = document.getDouble("npm.npm_spk")
+                        val roeSpk = document.getDouble("roe.roe_spk")
+                        val derSpk = document.getDouble("der.der_spk")
 
-        val dialogBinding: DialogCriteriaBinding? =
-            DialogCriteriaBinding.inflate(LayoutInflater.from(this), null, false)
 
-        val customDialog = AlertDialog.Builder(this, 0).create()
+                        if (name != null && code != null && gpmSpk != null && npmSpk != null && roeSpk != null && derSpk != null) {
+                            binding.tvName.text = name
 
-        customDialog.apply {
-            setView(dialogBinding?.root)
-            setCancelable(false)
-        }.show()
-
-        listWeight = mutableListOf("Pilih Bobot","10 %", "20 %", "30 %", "40 %", "50 %", "60 %", "70 %", "90 %", "100 %")
-        val bankDropdown = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, listWeight)
-        dialogBinding?.apply {
-            dropdownGpm.setAdapter(bankDropdown)
-            dropdownGpm.setText(listWeight[0], false)
-            dialogBinding.dropdownGpm.setOnItemClickListener{
-                    _, _, position, _ ->
-                weightC1 = listWeight[position]
-                Log.d("weight", "C1: $weightC1" )
-                if (weightC1 == "10 %"){
-                    cweightC1 = 0.1
-                }else if (weightC1 == "20 %"){
-                    cweightC1 = 0.2
-                } else if (weightC1 == "30 %"){
-                    cweightC1 = 0.3
-                } else if (weightC1 == "40 %"){
-                    cweightC1 = 0.4
-                } else if (weightC1 == "50 %"){
-                    cweightC1 = 0.5
-                } else if (weightC1 == "60 %"){
-                    cweightC1 = 0.6
-                } else if (weightC1 == "70 %"){
-                    cweightC1 = 0.7
-                }else if (weightC1 == "80 %"){
-                    cweightC1 = 0.8
-                }else if (weightC1 == "90 %"){
-                    cweightC1 = 0.9
-                }else if (weightC1 == "100 %"){
-                    cweightC1 = 1.0
-                }
-            }
-
-            dropdownNpm.setAdapter(bankDropdown)
-            dropdownNpm.setText(listWeight[0], false)
-            dialogBinding.dropdownNpm.setOnItemClickListener{
-                    _, _, position, _ ->
-                weightC2 = listWeight[position]
-                Log.d("weight", "C2: $weightC2 " )
-                if (weightC2 == "10 %"){
-                    cweightC2 = 0.1
-                }else if (weightC2 == "20 %"){
-                    cweightC2 = 0.2
-                } else if (weightC2 == "30 %"){
-                    cweightC2 = 0.3
-                } else if (weightC2 == "40 %"){
-                    cweightC2 = 0.4
-                } else if (weightC2 == "50 %"){
-                    cweightC2 = 0.5
-                } else if (weightC2 == "60 %"){
-                    cweightC2 = 0.6
-                } else if (weightC2 == "70 %"){
-                    cweightC2 = 0.7
-                }else if (weightC2 == "80 %"){
-                    cweightC2 = 0.8
-                }else if (weightC2 == "90 %"){
-                    cweightC2 = 0.9
-                }else if (weightC1 == "100 %"){
-                    cweightC2 = 1.0
-                }
-            }
-
-            dropdownRoe.setAdapter(bankDropdown)
-            dropdownRoe.setText(listWeight[0], false)
-            dialogBinding.dropdownRoe.setOnItemClickListener{
-                    _, _, position, _ ->
-                weightC3 = listWeight[position]
-                Log.d("weight", "C3: $weightC3 " )
-                if (weightC3 == "10 %"){
-                    cweightC3 = 0.1
-                }else if (weightC3 == "20 %"){
-                    cweightC3 = 0.2
-                } else if (weightC3 == "30 %"){
-                    cweightC3 = 0.3
-                } else if (weightC3 == "40 %"){
-                    cweightC3 = 0.4
-                } else if (weightC3 == "50 %"){
-                    cweightC3 = 0.5
-                } else if (weightC3 == "60 %"){
-                    cweightC3 = 0.6
-                } else if (weightC3 == "70 %"){
-                    cweightC3 = 0.7
-                }else if (weightC3 == "80 %"){
-                    cweightC3 = 0.8
-                }else if (weightC3 == "90 %"){
-                    cweightC3 = 0.9
-                }else if (weightC3 == "100 %"){
-                    cweightC3 = 1.0
-                }
-            }
-
-            dropdownDer.setAdapter(bankDropdown)
-            dropdownDer.setText(listWeight[0], false)
-            dialogBinding.dropdownDer.setOnItemClickListener{
-                    _, _, position, _ ->
-                weightC4 = listWeight[position]
-                Log.d("weight", "C4: $weightC4" )
-                if (weightC4 == "10 %"){
-                    cweightC4 = 0.1
-                }else if (weightC4 == "20 %"){
-                    cweightC4 = 0.2
-                } else if (weightC4 == "30 %"){
-                    cweightC4 = 0.3
-                } else if (weightC4 == "40 %"){
-                    cweightC4 = 0.4
-                } else if (weightC4 == "50 %"){
-                    cweightC4 = 0.5
-                } else if (weightC4 == "60 %"){
-                    cweightC4 = 0.6
-                } else if (weightC4 == "70 %"){
-                    cweightC4 = 0.7
-                }else if (weightC4 == "80 %"){
-                    cweightC4 = 0.8
-                }else if (weightC4 == "90 %"){
-                    cweightC4 = 0.9
-                }else if (weightC4 == "100 %"){
-                    cweightC4 = 1.0
-                }
-            }
-        }
-
-        dialogBinding?.btnSave?.setSafeOnClickListener {
-            Log.d("weight", "C1: $cweightC1 C2: $cweightC2 C3: $cweightC3 C4: $cweightC4")
-            var total = (cweightC1 + cweightC2 + cweightC3 + cweightC4)
-            Log.d("TAG_total", "Total: $total ")
-            if ( total == 1.0 || total == 0.9999999999999999) {
-                val criteriaWeight = hashMapOf(
-                    "gpm_weight" to cweightC1,
-                    "npm_weight" to cweightC2,
-                    "roe_weight" to cweightC3,
-                    "der_weight" to cweightC4
-                )
-                progresDialog.show()
-                firestoreDb.collection("criteria weight")
-                    .document(wId)
-                    .update(criteriaWeight as Map<String, Any>)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Berhasil merubah bobot", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, SpkActivity::class.java))
-                        progresDialog.dismiss()
-                        customDialog.dismiss()
-                        recreate()
+                        }
+                        Log.d("TAG_ambils", "${document.id} => ${document.data}")
                     }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(this, "Gagal merubah bobot", Toast.LENGTH_SHORT).show()
-                        Log.w("TAG", "Error updating document", e)
-                        progresDialog.dismiss()
-                    }
-            } else {
-                Toast.makeText(this, "Total jumlah bobot harus 100%", Toast.LENGTH_SHORT).show()
+
+                } else {
+                    Toast.makeText(applicationContext, "Data gagal di ambil!", Toast.LENGTH_SHORT).show()
+                    Log.d("TAG", "getData: gagal")
+                }
             }
-        }
-        dialogBinding?.btnCancel?.setSafeOnClickListener {
-            customDialog.dismiss()
-        }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Gagal mendapat data", Toast.LENGTH_SHORT).show()
+                Log.d("TAG", "Error getting documents: ", exception)
+
+            }
     }
+
+
 
 
 }
