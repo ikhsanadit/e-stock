@@ -113,7 +113,7 @@ class DetailStockActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Berhasil menghapus data saham", Toast.LENGTH_SHORT).show()
                 Log.d("TAG_Hapus", "DocumentSnapshot successfully deleted!")
-                startActivity(Intent(this, StockChartActivity::class.java))
+                //startActivity(Intent(this, StockChartActivity::class.java))
                 finish()
                 progresDialog.dismiss()
             }
