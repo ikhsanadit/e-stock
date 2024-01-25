@@ -23,16 +23,20 @@ internal class SpkListAdapter (private val listStock: List<DetailCompany>) : Rec
     }
 
     override fun onBindViewHolder(holder: SpkListAdapters, position: Int) {
-        val stock = listStock[position]
-        holder.binding.apply {
-            tvNameStock.text = stock.name
-            tvStockCode.text = stock.code
-            tvScore.text = stock.spk_score.toString()
+        if (position < listStock.size) {
+            val stock = listStock[position]
+            holder.binding.apply {
+                tvNameStock.text = stock.name ?: "Name Not Available"
+                tvStockCode.text = stock.code ?: "Code Not Available"
+                tvScore.text = String.format("%.2f", stock.spk_score ?: 0.0)
 
-            Log.d("TAG_STOCK", "stock id :${stock.id}")
-            Log.d("TAG_STOCK_Score", "score :${stock.spk_score}")
-
+                Log.d("TAG_STOCK", "stock id :${stock.id}")
+                Log.d("TAG_STOCK_Score", "score :${stock.spk_score}")
+            }
+        } else {
+            Log.e("TAG_posi", "Invalid position: $position, list size: ${listStock.size}")
         }
     }
+
 
 }

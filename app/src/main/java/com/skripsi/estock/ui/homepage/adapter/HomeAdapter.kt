@@ -29,7 +29,7 @@ internal class HomeAdapter (private val listStock: List<DetailCompany>) : Recycl
         val stock = listStock[position]
         holder.binding.apply {
             tvNameStock.text = stock.name
-            tvScore.text = stock.spk_score.toString()
+            tvScore.text = String.format("%.2f", stock.spk_score)
 
             Log.d("TAG_STOCK", "stock id :${stock.id}")
             Log.d("TAG_STOCK_Score", "score :${stock.spk_score}")

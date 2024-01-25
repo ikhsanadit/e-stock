@@ -192,7 +192,7 @@ class SpkActivity : AppCompatActivity(){
                                             Log.d("TAG_jaraknegatif", "jarak solusi ideal negatif: $rSolutionY")
                                             // Kedekatan Relatif / Nilai Preferensi
                                             alternatif.nilaiPreferensi = rSolutionY / (rSolutionX + rSolutionY)
-                                            Log.d("TAG sc", "sc: ${alternatif.nilaiPreferensi}")
+                                            Log.d("TAG_sc", "sc: ${alternatif.nilaiPreferensi}")
                                         }
 //                                        var gpmN = 0.0
 //                                        var npmN = 0.0
@@ -242,8 +242,7 @@ class SpkActivity : AppCompatActivity(){
                             }
 
                     }
-                    Log.d("TAG_ambil", "${document.id} => ${document.data}")
-                    stockAdapter.notifyDataSetChanged()
+                    getResult()
                     binding.tvSpk.visibility = View.INVISIBLE
                 } else {
                     Toast.makeText(applicationContext, "Data gagal di ambil!", Toast.LENGTH_SHORT).show()
@@ -252,8 +251,6 @@ class SpkActivity : AppCompatActivity(){
                 }
                 progresDialog.dismiss()
             }
-
-
 
     }
 
@@ -264,8 +261,8 @@ class SpkActivity : AppCompatActivity(){
             .get()
             .addOnCompleteListener { task ->
                 Log.d("TAG task", "isi task: $task ")
-                list.clear()
                 if (task.isSuccessful) {
+                    list.clear()
                     for (document in task.result!!) {
                         val id = document.id
                         val name = document.getString("name")
@@ -290,13 +287,9 @@ class SpkActivity : AppCompatActivity(){
                         }
                         Log.d("TAG_ambil", "${document.id} => ${document.data}")
                     }
-//                    list.sortWith(compareByDescending<DetailCompany> { it.gpm.gpm_spk }
-//                        .thenByDescending { it.npm.npm_spk }
-//                        .thenByDescending { it.roe.roe_spk }
-//                        .thenBy { it.der.der_spk })
 
                     stockAdapter.notifyDataSetChanged()
-                    getResult()
+
                     binding.tvSpk.visibility = View.INVISIBLE
                 } else {
                     Toast.makeText(applicationContext, "Data gagal di ambil!", Toast.LENGTH_SHORT).show()
@@ -311,6 +304,7 @@ class SpkActivity : AppCompatActivity(){
                 binding.tvSpk.visibility = View.VISIBLE
                 progresDialog.dismiss()
             }
+
     }
 
     private fun getResult(){
@@ -336,7 +330,7 @@ class SpkActivity : AppCompatActivity(){
                             binding.tvName.text = name
 
                         }
-                        Log.d("TAG_ambils", "${document.id} => ${document.data}")
+                        Log.d("TAG_am", "${document.id} => ${document.data}")
                     }
 
                 } else {

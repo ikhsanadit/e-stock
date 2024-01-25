@@ -105,6 +105,8 @@ class StockChartActivity : AppCompatActivity(), StockListAdapter.StockClickListe
                         }
                         Log.d("TAG_ambil", "${document.id} => ${document.data}")
                     }
+                    list.sortBy { it.code }
+
                     binding.tvSpk.visibility = View.INVISIBLE
                     stockAdapter.notifyDataSetChanged()
                 } else {

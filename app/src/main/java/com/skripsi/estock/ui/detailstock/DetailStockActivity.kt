@@ -159,10 +159,10 @@ class DetailStockActivity : AppCompatActivity() {
                         binding.apply {
                             tvCompanyName.text = detailCompany.name
                             tvCompanyCode.text = detailCompany.code
-                            tvGpm.text = detailCompany.gpm.gpm_stock
-                            tvNpm.text = detailCompany.npm.npm_stock
-                            tvRoe.text = detailCompany.roe.roe_stock
-                            tvDer.text = detailCompany.der.der_stock
+                            tvGpm.text = detailCompany.gpm.gpm_stock + " %"
+                            tvNpm.text = detailCompany.npm.npm_stock + " %"
+                            tvRoe.text = detailCompany.roe.roe_stock + " %"
+                            tvDer.text = detailCompany.der.der_stock + " %"
 
                             cgpmStock = detailCompany.gpm.gpm_stock.toString()
                             cnpmStock = detailCompany.npm.npm_stock.toString()
